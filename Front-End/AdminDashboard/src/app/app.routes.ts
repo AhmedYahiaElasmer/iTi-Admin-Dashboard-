@@ -36,14 +36,20 @@ export const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'dashboard', component: AdmindashboardComponent },
-      { path: 'addCategory', component: AddCatogeryFormComponent },
+
       {
         path: 'userslist',
         component: UsersListComponent,
         children: [{ path: 'editeUser/:id', component: UserEditFormComponent }],
       },
       { path: 'content', component: ContentComponent },
-      { path: 'Category', component: CategoryComponent },
+      {
+        path: 'Category',
+        component: CategoryComponent,
+        children: [
+          { path: 'addCategory', component: AddCatogeryFormComponent },
+        ],
+      },
       {
         path: 'products',
         component: ProductsListComponent,
