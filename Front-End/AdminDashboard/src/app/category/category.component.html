@@ -1,3 +1,4 @@
+@if(togle){
 <div class="Wrapper d-flex flex-wrap gap-3">
   @for(cat of allCategory ;track cat._id ){
 
@@ -25,9 +26,13 @@
 @if(allCategory.length>0){
 
 <button
+  (click)="togleUser()"
   type="button"
-  routerLink="/loginadmin/addCategory"
+  routerLink="addCategory"
   class="btn btn-dark mt-5"
 >
   Add Category</button
->}
+>} } @if(!togle){
+
+<router-outlet></router-outlet>
+}

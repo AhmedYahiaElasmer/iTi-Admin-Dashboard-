@@ -35,4 +35,8 @@ export class CategoryComponent implements OnInit {
   consel() {
     console.log('aaaaa');
   }
+  togle: any = true;
+  togleUser() {
+    this.togle = false;
+  }
 }

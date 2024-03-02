@@ -8,7 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-catogery-form',
@@ -19,7 +20,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './add-catogery-form.component.css',
 })
 export class AddCatogeryFormComponent {
-  constructor(private UService: UsersService) {}
+  constructor(
+    private UService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   consle() {
     console.log('zeko');
@@ -41,12 +46,26 @@ export class AddCatogeryFormComponent {
     console.log(this.category.value);
     if (this.vaildtionCategory.status === 'VALID') {
       console.log('vaild');
-      const categ = {
-        name: this.vaildtionCategory.value.Category,
-      };
-      console.log(categ);
-      this.UService.addNewCategory(categ).subscribe({
-        complete: () => alert('add successfully'),
+      //////////////////////////////////////////
+      const formData = new FormData();
+      const nameCat: any = this.vaildtionCategory.value.Category;
+      const imgCat: any = this.vaildtionCategory.value.file;
+      formData.append('name', nameCat);
+      formData.append('catImg', imgCat);
+      // formData.append(
+      //   'catImg',
+      //   'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg'
+      // );
+      console.log('nameCat', nameCat);
+      console.log(formData);
+      this.UService.addNewCategory(formData).subscribe({
+        complete: () => (
+          alert('add successfully'),
+          // this.router.navigate([''], {
+          //   relativeTo: this.route,
+          // })
+          location.reload()
+        ),
       });
     }
   }
